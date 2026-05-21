@@ -6,7 +6,7 @@ A resource calculator for planning your T12 troop research upgrades in Whiteout 
 
 ## Getting Started
 
-Open `T12_Calculator.html` in any browser — no installation needed.
+[Link to the calculator](https://s-dev-account.github.io/t12-calculator/)
 
 ---
 
@@ -23,11 +23,11 @@ Inside each troop section, set your **Current Level** and **Target Level** for e
 
 - **Gear — Head** (max 5)
 - **Gear — Shoulder / Body / Feet / Weapon** — all 4 pieces together (max 5)
-- **Skills I** — Atk / Lethality / HP / Defense (max 20)
+- **Skills I** — Atk / Lethality / Health / Defense (max 20)
 - **Troop Skill** (max 3)
-- **Skills II** — Atk / Lethality / HP / Defense (max 50)
+- **Skills II** — Atk / Lethality / Health / Defense (max 50)
 - **Solar Supremacy** (max 15)
-- **Skills III** — Atk / Lethality / HP / Defense (max 50)
+- **Skills III** — Atk / Lethality / Health / Defense (max 50)
 
 Leave both at 0 for anything you are not upgrading.
 
@@ -38,6 +38,5 @@ Hit **⚡ Calculate Resources** at the bottom. Results show the total Steel, Ref
 
 ## Notes
 
-- If a Target Level is lower than Current Level the field turns red and the button disables — fix it before calculating
 - Gear costs for Shoulder / Body / Feet / Weapon are the combined total for all 4 pieces
 - Skills I, II and III costs cover all 4 combat skills (Atk, Lethality, HP, Defense)
