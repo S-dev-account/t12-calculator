@@ -7,6 +7,7 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: Arial, sans-serif; background: #0d1b2a; color: #e0e8f0; min-height: 100vh; padding: 16px; }
+  .container { max-width: 720px; margin: 0 auto; }
   h1 { text-align: center; color: #7ecbff; font-size: 1.4em; margin-bottom: 4px; letter-spacing: 1px; }
   .subtitle { text-align: center; color: #7a9bb5; font-size: 0.78em; margin-bottom: 18px; }
   .section-title { color: #9ab8d0; font-size: 0.75em; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin: 10px 0 6px; }
@@ -54,7 +55,7 @@
   }
   select.num-input:focus { outline: none; border-color: #7ecbff; }
   select.num-input.invalid { border: 2px solid #ff5555 !important; background-color: #2a0d0d !important; }
-  .gear-table select.num-input { width: 80px; }
+  .gear-table select.num-input { width: 70px; }
 
   .skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .skill-item { display: flex; flex-direction: column; gap: 3px; }
@@ -79,8 +80,55 @@
 </head>
 <body>
 
+<div class="container">
 <h1>⚔️ T12 Troops Calculator</h1>
 <div class="subtitle">Whiteout Survival · Based on Torxim (684) research data</div>
+
+<!-- How to Use -->
+<div style="margin-bottom:14px; border-radius:10px; overflow:hidden; border:1px solid #1e3a55;">
+  <div class="acc-header" onclick="toggleGuide()" style="padding:12px 14px;">
+    <div class="acc-left">
+      <span class="acc-icon">📖</span>
+      <span class="acc-label">How to Use</span>
+    </div>
+    <span class="chevron" id="guide-chevron">▼</span>
+  </div>
+  <div id="guide-body" style="display:none; padding:14px 16px; background:#0f1f30;">
+
+    <div class="section-title">1 · Select Your Troop Types</div>
+    <p style="font-size:0.82em; color:#c0d8e8; line-height:1.6; margin-bottom:6px;">Three sections are shown — <strong>Infantry</strong> 🛡️, <strong>Lancer</strong> 🐴 and <strong>Marksman</strong> 🏹.</p>
+    <ul style="font-size:0.8em; color:#9ab8d0; line-height:1.8; padding-left:16px;">
+      <li>Toggle the <strong>Include</strong> switch on each section to include or exclude that troop type from the calculation</li>
+      <li>Click the section header to collapse or expand it</li>
+    </ul>
+
+    <div class="divider"></div>
+    <div class="section-title">2 · Fill In Your Levels</div>
+    <p style="font-size:0.82em; color:#c0d8e8; line-height:1.6; margin-bottom:6px;">Inside each troop section, set your <strong>Current Level</strong> and <strong>Target Level</strong> for each row using the dropdowns:</p>
+    <ul style="font-size:0.8em; color:#9ab8d0; line-height:1.8; padding-left:16px; margin-bottom:6px;">
+      <li>Gear — Head (max 5)</li>
+      <li>Gear — Shoulder / Body / Feet / Weapon — all 4 pieces together (max 5)</li>
+      <li>Skills I — Atk / Lethality / Health / Defense (max 20)</li>
+      <li>Troop Skill (max 3)</li>
+      <li>Skills II — Atk / Lethality / Health / Defense (max 50)</li>
+      <li>Solar Supremacy (max 15)</li>
+      <li>Skills III — Atk / Lethality / Health / Defense (max 50)</li>
+    </ul>
+    <p style="font-size:0.82em; color:#c0d8e8; line-height:1.6;">Leave both at 0 for anything you are not upgrading.</p>
+
+    <div class="divider"></div>
+    <div class="section-title">3 · Calculate</div>
+    <p style="font-size:0.82em; color:#c0d8e8; line-height:1.6;">Hit <strong>⚡ Calculate Resources</strong> at the bottom. Results show the total Steel, Refined FC, FC Shards, Meat/Wood, Coal, Iron, and Research Time needed across all included troop types.</p>
+
+    <div class="divider"></div>
+    <div class="section-title">📝 Notes</div>
+    <ul style="font-size:0.8em; color:#9ab8d0; line-height:1.8; padding-left:16px;">
+      <li>Gear costs for Shoulder / Body / Feet / Weapon are the combined total for all 4 pieces</li>
+      <li>Skills I, II and III costs cover all 4 combat skills (Atk, Lethality, HP, Defense)</li>
+    </ul>
+  </div>
+</div>
+
 <div id="accordions"></div>
 <div class="calc-btn-wrap">
   <button class="calc-btn" id="calc-btn" onclick="calc()">⚡ Calculate Resources</button>
@@ -345,9 +393,19 @@ function calc() {
   card.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
+// ── GUIDE TOGGLE ─────────────────────────────────────────────────────────────
+function toggleGuide() {
+  const body = document.getElementById('guide-body');
+  const chevron = document.getElementById('guide-chevron');
+  const open = body.style.display === 'none';
+  body.style.display = open ? 'block' : 'none';
+  chevron.classList.toggle('open', open);
+}
+
 // ── INIT ──────────────────────────────────────────────────────────────────────
 buildAccordions();
 liveValidate();
 </script>
+</div>
 </body>
 </html>
