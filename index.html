@@ -107,7 +107,10 @@
     <p style="font-size:0.82em; color:#c0d8e8; line-height:1.6; margin-bottom:6px;">Inside each troop section, set your <strong>Current Level</strong> and <strong>Target Level</strong> for each row using the dropdowns:</p>
     <ul style="font-size:0.8em; color:#9ab8d0; line-height:1.8; padding-left:16px; margin-bottom:6px;">
       <li>Gear — Head (max 5)</li>
-      <li>Gear — Shoulder / Body / Feet / Weapon — all 4 pieces together (max 5)</li>
+      <li>Gear — Shoulder (max 5)</li>
+      <li>Gear — Body (max 5)</li>
+      <li>Gear — Feet (max 5)</li>
+      <li>Gear — Weapon (max 5)</li>
       <li>Skills I — Atk / Lethality / Health / Defense (max 20)</li>
       <li>Troop Skill (max 3)</li>
       <li>Skills II — Atk / Lethality / Health / Defense (max 50)</li>
@@ -123,7 +126,7 @@
     <div class="divider"></div>
     <div class="section-title">📝 Notes</div>
     <ul style="font-size:0.8em; color:#9ab8d0; line-height:1.8; padding-left:16px;">
-      <li>Gear costs for Shoulder / Body / Feet / Weapon are the combined total for all 4 pieces</li>
+      <li>Each gear piece is tracked and costed independently</li>
       <li>Skills I, II and III costs cover all 4 combat skills (Atk, Lethality, HP, Defense)</li>
     </ul>
   </div>
@@ -199,7 +202,10 @@ const TROOPS = [
 // field key -> max value
 const FIELD_MAX = {
   'g-head-cur':5,'g-head-tgt':5,
+  'g-shoulder-cur':5,'g-shoulder-tgt':5,
   'g-body-cur':5,'g-body-tgt':5,
+  'g-feet-cur':5,'g-feet-tgt':5,
+  'g-weapon-cur':5,'g-weapon-tgt':5,
   'skill1-cur':20,'skill1-tgt':20,
   'troopskill-cur':3,'troopskill-tgt':3,
   'skill2-cur':50,'skill2-tgt':50,
@@ -209,7 +215,10 @@ const FIELD_MAX = {
 // pairs for cross-validation (target >= current)
 const FIELD_PAIRS = [
   ['g-head-cur','g-head-tgt'],
+  ['g-shoulder-cur','g-shoulder-tgt'],
   ['g-body-cur','g-body-tgt'],
+  ['g-feet-cur','g-feet-tgt'],
+  ['g-weapon-cur','g-weapon-tgt'],
   ['skill1-cur','skill1-tgt'],
   ['troopskill-cur','troopskill-tgt'],
   ['skill2-cur','skill2-tgt'],
@@ -238,9 +247,24 @@ function panelHTML(tid) {
           <td class="center">${inp(p+'g-head-tgt',5)}</td>
         </tr>
         <tr>
-          <td><span class="gear-icon">🧥</span>Shoulder / Body / Feet / Weapon <span class="max-badge">(all 4)</span></td>
+          <td><span class="gear-icon">🫱</span>Shoulder</td>
+          <td class="center">${inp(p+'g-shoulder-cur',5)}</td>
+          <td class="center">${inp(p+'g-shoulder-tgt',5)}</td>
+        </tr>
+        <tr>
+          <td><span class="gear-icon">🧥</span>Body</td>
           <td class="center">${inp(p+'g-body-cur',5)}</td>
           <td class="center">${inp(p+'g-body-tgt',5)}</td>
+        </tr>
+        <tr>
+          <td><span class="gear-icon">👢</span>Feet</td>
+          <td class="center">${inp(p+'g-feet-cur',5)}</td>
+          <td class="center">${inp(p+'g-feet-tgt',5)}</td>
+        </tr>
+        <tr>
+          <td><span class="gear-icon">⚔️</span>Weapon</td>
+          <td class="center">${inp(p+'g-weapon-cur',5)}</td>
+          <td class="center">${inp(p+'g-weapon-tgt',5)}</td>
         </tr>
       </tbody>
     </table>
@@ -349,10 +373,16 @@ function fmt(n){if(n>=1e9)return(n/1e9).toFixed(2)+'B';if(n>=1e6)return(n/1e6).t
 // ── CALC PER TROOP ────────────────────────────────────────────────────────────
 function calcTroop(id, tot) {
   const p = id+'-';
-  const hC=clamp(gv(p+'g-head-cur'),0,5),  hT=clamp(gv(p+'g-head-tgt'),0,5);
-  const bC=clamp(gv(p+'g-body-cur'),0,5),  bT=clamp(gv(p+'g-body-tgt'),0,5);
-  if(hT>hC) addTo(tot,sumArr(headGear,hC,hT));
-  if(bT>bC) addTo(tot,sumArr(bodyGear,bC,bT));
+  const hC=clamp(gv(p+'g-head-cur'),0,5),     hT=clamp(gv(p+'g-head-tgt'),0,5);
+  const shC=clamp(gv(p+'g-shoulder-cur'),0,5), shT=clamp(gv(p+'g-shoulder-tgt'),0,5);
+  const bC=clamp(gv(p+'g-body-cur'),0,5),      bT=clamp(gv(p+'g-body-tgt'),0,5);
+  const fC=clamp(gv(p+'g-feet-cur'),0,5),      fT=clamp(gv(p+'g-feet-tgt'),0,5);
+  const wC=clamp(gv(p+'g-weapon-cur'),0,5),    wT=clamp(gv(p+'g-weapon-tgt'),0,5);
+  if(hT>hC)   addTo(tot,sumArr(headGear,hC,hT));
+  if(shT>shC) addTo(tot,sumArr(bodyGear,shC,shT));
+  if(bT>bC)   addTo(tot,sumArr(bodyGear,bC,bT));
+  if(fT>fC)   addTo(tot,sumArr(bodyGear,fC,fT));
+  if(wT>wC)   addTo(tot,sumArr(bodyGear,wC,wT));
   const s1c=clamp(gv(p+'skill1-cur'),0,20), s1t=clamp(gv(p+'skill1-tgt'),0,20);
   if(s1t>s1c) addTo(tot,sumArr(skill1Data,s1c,s1t),4);
   const tsc=clamp(gv(p+'troopskill-cur'),0,3), tst=clamp(gv(p+'troopskill-tgt'),0,3);
