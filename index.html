@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>T12 Troops Calculator – Whiteout Survival (Dev version)</title>
+<title>T12 Troops Calculator – Whiteout Survival</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: Arial, sans-serif; background: #0d1b2a; color: #e0e8f0; min-height: 100vh; padding: 16px; }
@@ -138,7 +138,8 @@
     <div class="res-item"><div class="res-label">&#128297; Steel</div><div class="res-val green" id="r-steel">&#8212;</div></div>
     <div class="res-item"><div class="res-label">&#128311; Refined FC</div><div class="res-val blue" id="r-rfc">&#8212;</div></div>
     <div class="res-item"><div class="res-label">&#128142; FC Shards</div><div class="res-val blue" id="r-shrd">&#8212;</div></div>
-    <div class="res-item"><div class="res-label">&#129385; Meat / Wood</div><div class="res-val orange" id="r-meat">&#8212;</div></div>
+    <div class="res-item"><div class="res-label">&#129385; Meat</div><div class="res-val orange" id="r-meat">&#8212;</div></div>
+    <div class="res-item"><div class="res-label">&#129683; Wood</div><div class="res-val orange" id="r-wood">&#8212;</div></div>
     <div class="res-item"><div class="res-label">&#129704; Coal</div><div class="res-val white" id="r-coal">&#8212;</div></div>
     <div class="res-item"><div class="res-label">&#9935;&#65039; Iron</div><div class="res-val white" id="r-iron">&#8212;</div></div>
     <div class="res-item"><div class="res-label">&#9201;&#65039; Research Time</div><div class="res-val red" id="r-time">&#8212;</div></div>
@@ -164,35 +165,47 @@ var bodyGear = [
   {steel:54000,rfc:15,shrd:105},{steel:72000,rfc:20,shrd:140},{steel:108000,rfc:30,shrd:210}
 ];
 var skill1Data = [
-  {steel:15000,rfc:2,shrd:16,meat:500000,coal:100000,iron:25000,time:0.4167},
-  {steel:15750,rfc:2,shrd:17,meat:520000,coal:100000,iron:26000,time:0.4375},
-  {steel:16500,rfc:2,shrd:17,meat:550000,coal:110000,iron:27000,time:0.4583},
-  {steel:17250,rfc:2,shrd:18,meat:570000,coal:110000,iron:28000,time:0.4792},
-  {steel:18000,rfc:3,shrd:19,meat:600000,coal:120000,iron:30000,time:0.5},
-  {steel:18750,rfc:3,shrd:20,meat:620000,coal:120000,iron:31000,time:0.5208},
-  {steel:19500,rfc:3,shrd:21,meat:650000,coal:130000,iron:32000,time:0.5417},
-  {steel:21000,rfc:3,shrd:22,meat:700000,coal:140000,iron:35000,time:0.5833},
-  {steel:22500,rfc:3,shrd:24,meat:750000,coal:150000,iron:37000,time:0.625},
-  {steel:24000,rfc:4,shrd:26,meat:800000,coal:160000,iron:40000,time:0.6667},
-  {steel:25500,rfc:4,shrd:27,meat:850000,coal:170000,iron:42000,time:0.7083},
-  {steel:27000,rfc:4,shrd:29,meat:900000,coal:180000,iron:45000,time:0.75},
-  {steel:28500,rfc:4,shrd:30,meat:950000,coal:190000,iron:47000,time:0.7917},
-  {steel:30000,rfc:5,shrd:32,meat:1000000,coal:200000,iron:50000,time:0.8333},
-  {steel:31500,rfc:5,shrd:34,meat:1000000,coal:210000,iron:52000,time:0.875},
-  {steel:33000,rfc:5,shrd:35,meat:1100000,coal:220000,iron:55000,time:0.9167},
-  {steel:34500,rfc:5,shrd:37,meat:1100000,coal:230000,iron:57000,time:0.9583},
-  {steel:36000,rfc:6,shrd:39,meat:1200000,coal:240000,iron:60000,time:1.0},
-  {steel:37500,rfc:6,shrd:40,meat:1200000,coal:250000,iron:62000,time:1.0417},
-  {steel:39000,rfc:6,shrd:42,meat:1300000,coal:260000,iron:65000,time:1.0833}
+  {steel:15000,rfc:2,shrd:16,meat:500000,wood:500000,coal:100000,iron:25000,time:0.4167},
+  {steel:15750,rfc:2,shrd:17,meat:520000,wood:520000,coal:100000,iron:26000,time:0.4375},
+  {steel:16500,rfc:2,shrd:17,meat:550000,wood:550000,coal:110000,iron:27000,time:0.4583},
+  {steel:17250,rfc:2,shrd:18,meat:570000,wood:570000,coal:110000,iron:28000,time:0.4792},
+  {steel:18000,rfc:3,shrd:19,meat:600000,wood:600000,coal:120000,iron:30000,time:0.5},
+  {steel:18750,rfc:3,shrd:20,meat:620000,wood:620000,coal:120000,iron:31000,time:0.5208},
+  {steel:19500,rfc:3,shrd:21,meat:650000,wood:650000,coal:130000,iron:32000,time:0.5417},
+  {steel:21000,rfc:3,shrd:22,meat:700000,wood:700000,coal:140000,iron:35000,time:0.5833},
+  {steel:22500,rfc:3,shrd:24,meat:750000,wood:750000,coal:150000,iron:37000,time:0.625},
+  {steel:24000,rfc:4,shrd:26,meat:800000,wood:800000,coal:160000,iron:40000,time:0.6667},
+  {steel:25500,rfc:4,shrd:27,meat:850000,wood:850000,coal:170000,iron:42000,time:0.7083},
+  {steel:27000,rfc:4,shrd:29,meat:900000,wood:900000,coal:180000,iron:45000,time:0.75},
+  {steel:28500,rfc:4,shrd:30,meat:950000,wood:950000,coal:190000,iron:47000,time:0.7917},
+  {steel:30000,rfc:5,shrd:32,meat:1000000,wood:1000000,coal:200000,iron:50000,time:0.8333},
+  {steel:31500,rfc:5,shrd:34,meat:1000000,wood:1000000,coal:210000,iron:52000,time:0.875},
+  {steel:33000,rfc:5,shrd:35,meat:1100000,wood:1100000,coal:220000,iron:55000,time:0.9167},
+  {steel:34500,rfc:5,shrd:37,meat:1100000,wood:1100000,coal:230000,iron:57000,time:0.9583},
+  {steel:36000,rfc:6,shrd:39,meat:1200000,wood:1200000,coal:240000,iron:60000,time:1.0},
+  {steel:37500,rfc:6,shrd:40,meat:1200000,wood:1200000,coal:250000,iron:62000,time:1.0417},
+  {steel:39000,rfc:6,shrd:42,meat:1300000,wood:1300000,coal:260000,iron:65000,time:1.0833}
 ];
 var troopSkillData = [
-  {steel:200000,rfc:50,shrd:325,meat:15000000,coal:3000000,iron:750000,time:20},
-  {steel:200000,rfc:50,shrd:325,meat:15000000,coal:3000000,iron:750000,time:20},
-  {steel:200000,rfc:50,shrd:325,meat:15000000,coal:3000000,iron:750000,time:20}
+  {steel:200000,rfc:50,shrd:325,meat:15000000,wood:15000000,coal:3000000,iron:750000,time:20},
+  {steel:200000,rfc:50,shrd:325,meat:15000000,wood:15000000,coal:3000000,iron:750000,time:20},
+  {steel:200000,rfc:50,shrd:325,meat:15000000,wood:15000000,coal:3000000,iron:750000,time:20}
 ];
-function getSkill2Row(lvl){return [{steel:18000,rfc:5,shrd:75,meat:500000,coal:100000,iron:25000,time:0.5},{steel:22500,rfc:6,shrd:93,meat:620000,coal:120000,iron:31000,time:0.625},{steel:27000,rfc:7,shrd:112,meat:750000,coal:150000,iron:37000,time:0.75},{steel:31500,rfc:8,shrd:131,meat:870000,coal:170000,iron:43000,time:0.875},{steel:36000,rfc:10,shrd:150,meat:1000000,coal:200000,iron:50000,time:1.0}][Math.min(Math.ceil(lvl/10)-1,4)];}
-var solarData=[{steel:25000,rfc:5,shrd:75,meat:500000,coal:100000,iron:25000,time:0.5},{steel:26250,rfc:5,shrd:78,meat:520000,coal:100000,iron:26000,time:0.525},{steel:27500,rfc:5,shrd:82,meat:550000,coal:110000,iron:27000,time:0.55},{steel:30000,rfc:6,shrd:90,meat:600000,coal:120000,iron:30000,time:0.6},{steel:32500,rfc:6,shrd:97,meat:650000,coal:130000,iron:32000,time:0.65},{steel:35000,rfc:7,shrd:105,meat:700000,coal:140000,iron:35000,time:0.7},{steel:37500,rfc:7,shrd:112,meat:750000,coal:150000,iron:37000,time:0.75},{steel:40000,rfc:8,shrd:120,meat:800000,coal:160000,iron:40000,time:0.8},{steel:42500,rfc:8,shrd:127,meat:850000,coal:170000,iron:42000,time:0.85},{steel:45000,rfc:9,shrd:135,meat:900000,coal:180000,iron:45000,time:0.9},{steel:47500,rfc:9,shrd:142,meat:950000,coal:190000,iron:47000,time:0.95},{steel:50000,rfc:10,shrd:150,meat:1000000,coal:200000,iron:50000,time:1.0},{steel:52500,rfc:10,shrd:157,meat:1000000,coal:210000,iron:52000,time:1.05},{steel:57500,rfc:11,shrd:172,meat:1100000,coal:230000,iron:57000,time:1.15},{steel:62500,rfc:12,shrd:187,meat:1200000,coal:250000,iron:62000,time:1.25}];
-function getSkill3Row(lvl){return [{steel:25000,rfc:5,shrd:125,meat:1000000,coal:200000,iron:50000,time:2.0},{steel:31250,rfc:6,shrd:156,meat:1200000,coal:250000,iron:62000,time:2.5},{steel:37500,rfc:7,shrd:187,meat:1500000,coal:300000,iron:75000,time:3.0},{steel:43750,rfc:8,shrd:218,meat:1700000,coal:350000,iron:87000,time:3.5},{steel:50000,rfc:10,shrd:250,meat:2000000,coal:400000,iron:100000,time:4.0}][Math.min(Math.ceil(lvl/10)-1,4)];}
+var exaltedData = [
+  {steel:15000,rfc:2,shrd:16,meat:500000,wood:500000,coal:100000,iron:25000},
+  {steel:15750,rfc:2,shrd:17,meat:520000,wood:520000,coal:100000,iron:26000},
+  {steel:16500,rfc:2,shrd:17,meat:550000,wood:550000,coal:110000,iron:27000},
+  {steel:17250,rfc:2,shrd:18,meat:570000,wood:570000,coal:110000,iron:28000},
+  {steel:18000,rfc:3,shrd:19,meat:600000,wood:600000,coal:120000,iron:30000},
+  {steel:18750,rfc:3,shrd:20,meat:620000,wood:620000,coal:120000,iron:31000},
+  {steel:19500,rfc:3,shrd:21,meat:650000,wood:650000,coal:130000,iron:32000},
+  {steel:21000,rfc:3,shrd:22,meat:700000,wood:700000,coal:140000,iron:35000},
+  {steel:22500,rfc:3,shrd:24,meat:750000,wood:750000,coal:150000,iron:37000},
+  {steel:24000,rfc:4,shrd:26,meat:800000,wood:800000,coal:160000,iron:40000}
+];
+function getSkill2Row(lvl){return [{steel:18000,rfc:5,shrd:75,meat:500000,wood:500000,coal:100000,iron:25000,time:0.5},{steel:22500,rfc:6,shrd:93,meat:620000,wood:620000,coal:120000,iron:31000,time:0.625},{steel:27000,rfc:7,shrd:112,meat:750000,wood:750000,coal:150000,iron:37000,time:0.75},{steel:31500,rfc:8,shrd:131,meat:870000,wood:870000,coal:170000,iron:43000,time:0.875},{steel:36000,rfc:10,shrd:150,meat:1000000,wood:1000000,coal:200000,iron:50000,time:1.0}][Math.min(Math.ceil(lvl/10)-1,4)];}
+var solarData=[{steel:25000,rfc:5,shrd:75,meat:500000,wood:500000,coal:100000,iron:25000,time:0.5},{steel:26250,rfc:5,shrd:78,meat:520000,wood:520000,coal:100000,iron:26000,time:0.525},{steel:27500,rfc:5,shrd:82,meat:550000,wood:550000,coal:110000,iron:27000,time:0.55},{steel:30000,rfc:6,shrd:90,meat:600000,wood:600000,coal:120000,iron:30000,time:0.6},{steel:32500,rfc:6,shrd:97,meat:650000,wood:650000,coal:130000,iron:32000,time:0.65},{steel:35000,rfc:7,shrd:105,meat:700000,wood:700000,coal:140000,iron:35000,time:0.7},{steel:37500,rfc:7,shrd:112,meat:750000,wood:750000,coal:150000,iron:37000,time:0.75},{steel:40000,rfc:8,shrd:120,meat:800000,wood:800000,coal:160000,iron:40000,time:0.8},{steel:42500,rfc:8,shrd:127,meat:850000,wood:850000,coal:170000,iron:42000,time:0.85},{steel:45000,rfc:9,shrd:135,meat:900000,wood:900000,coal:180000,iron:45000,time:0.9},{steel:47500,rfc:9,shrd:142,meat:950000,wood:950000,coal:190000,iron:47000,time:0.95},{steel:50000,rfc:10,shrd:150,meat:1000000,wood:1000000,coal:200000,iron:50000,time:1.0},{steel:52500,rfc:10,shrd:157,meat:1000000,wood:1000000,coal:210000,iron:52000,time:1.05},{steel:57500,rfc:11,shrd:172,meat:1100000,wood:1100000,coal:230000,iron:57000,time:1.15},{steel:62500,rfc:12,shrd:187,meat:1200000,wood:1200000,coal:250000,iron:62000,time:1.25}];
+function getSkill3Row(lvl){return [{steel:25000,rfc:5,shrd:125,meat:1000000,wood:1000000,coal:200000,iron:50000,time:2.0},{steel:31250,rfc:6,shrd:156,meat:1200000,wood:1200000,coal:250000,iron:62000,time:2.5},{steel:37500,rfc:7,shrd:187,meat:1500000,wood:1500000,coal:300000,iron:75000,time:3.0},{steel:43750,rfc:8,shrd:218,meat:1700000,wood:1700000,coal:350000,iron:87000,time:3.5},{steel:50000,rfc:10,shrd:250,meat:2000000,wood:2000000,coal:400000,iron:100000,time:4.0}][Math.min(Math.ceil(lvl/10)-1,4)];}
 
 // ── CONFIG ───────────────────────────────────────────────────────────────────
 var TROOPS = [
@@ -206,6 +219,8 @@ var GEAR_PIECES  = ['g-head','g-shoulder','g-body','g-feet','g-weapon'];
 var GEAR_LABELS  = {'g-head':'Head','g-shoulder':'Shoulder','g-body':'Body','g-feet':'Feet','g-weapon':'Weapon'};
 var GEAR_ICONS   = {'g-head':'🪖','g-shoulder':'🫱','g-body':'🧥','g-feet':'👢','g-weapon':'⚔️'};
 var GEAR_DATA    = {'g-head':headGear,'g-shoulder':bodyGear,'g-body':bodyGear,'g-feet':bodyGear,'g-weapon':bodyGear};
+var EXALTED_SKILLS = ['healing','firstaid','training'];
+var EXALTED_LABELS = {healing:'Healing Cost', firstaid:'Healing Time', training:'Training Cost'};
 
 var state = {
   infantry:{open:true,enabled:true},
@@ -243,6 +258,7 @@ function resetTroop(tid) {
   var fields = [];
   GEAR_PIECES.forEach(function(g) { fields.push(g+'-cur'); fields.push(g+'-tgt'); });
   fields.push('troopskill-cur','troopskill-tgt','solar-cur','solar-tgt');
+  EXALTED_SKILLS.forEach(function(ex) { fields.push('exalted-'+ex+'-cur'); fields.push('exalted-'+ex+'-tgt'); });
   ['skill1','skill2','skill3'].forEach(function(p) {
     SKILLS.forEach(function(sk) { fields.push(p+'-'+sk+'-cur'); fields.push(p+'-'+sk+'-tgt'); });
   });
@@ -338,6 +354,26 @@ function panelHTML(tid) {
     + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'troopskill-tgt', 3) + '</div>'
     + '</div>';
 
+  // EXALTED
+  var exCurIds = [], exTgtIds = [];
+  EXALTED_SKILLS.forEach(function(ex) {
+    exCurIds.push(p+'exalted-'+ex+'-cur');
+    exTgtIds.push(p+'exalted-'+ex+'-tgt');
+  });
+  h += '<div class="divider"></div>'
+    + '<div class="section-title-row">'
+    + '<div class="section-title">Reduction Techs <span class="max-badge">(max 10)</span></div>'
+    + '</div>'
+    + makeQS(exCurIds, exTgtIds, 10);
+  EXALTED_SKILLS.forEach(function(ex) {
+    h += '<div class="skill-block">'
+      + '<div class="skill-block-label">' + EXALTED_LABELS[ex] + '</div>'
+      + '<div class="skill-grid">'
+      + '<div class="skill-item"><label>Current Level</label>' + numSel(p+'exalted-'+ex+'-cur', 10) + '</div>'
+      + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'exalted-'+ex+'-tgt', 10) + '</div>'
+      + '</div></div>';
+  });
+
   // SKILLS II
   var s2CurIds = [], s2TgtIds = [], s2Fields = [];
   SKILLS.forEach(function(sk) {
@@ -369,6 +405,26 @@ function panelHTML(tid) {
     + '<div class="skill-item"><label>Current Level</label>' + numSel(p+'solar-cur', 15) + '</div>'
     + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'solar-tgt', 15) + '</div>'
     + '</div>';
+
+  // EXALTED
+  var exCurIds = [], exTgtIds = [];
+  EXALTED_SKILLS.forEach(function(ex) {
+    exCurIds.push(p+'exalted-'+ex+'-cur');
+    exTgtIds.push(p+'exalted-'+ex+'-tgt');
+  });
+  h += '<div class="divider"></div>'
+    + '<div class="section-title-row">'
+    + '<div class="section-title">Reduction Techs <span class="max-badge">(max 10)</span></div>'
+    + '</div>'
+    + makeQS(exCurIds, exTgtIds, 10);
+  EXALTED_SKILLS.forEach(function(ex) {
+    h += '<div class="skill-block">'
+      + '<div class="skill-block-label">' + EXALTED_LABELS[ex] + '</div>'
+      + '<div class="skill-grid">'
+      + '<div class="skill-item"><label>Current Level</label>' + numSel(p+'exalted-'+ex+'-cur', 10) + '</div>'
+      + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'exalted-'+ex+'-tgt', 10) + '</div>'
+      + '</div></div>';
+  });
 
   // SKILLS III
   var s3CurIds = [], s3TgtIds = [], s3Fields = [];
@@ -453,6 +509,7 @@ function liveValidate() {
     ['skill1','skill2','skill3'].forEach(function(p) {
       SKILLS.forEach(function(sk) { checks.push([p+'-'+sk+'-cur', p+'-'+sk+'-tgt']); });
     });
+    EXALTED_SKILLS.forEach(function(ex) { checks.push(['exalted-'+ex+'-cur','exalted-'+ex+'-tgt']); });
     checks.push(['troopskill-cur','troopskill-tgt']);
     checks.push(['solar-cur','solar-tgt']);
     checks.forEach(function(pair) {
@@ -473,9 +530,9 @@ function liveValidate() {
 // ── CALC HELPERS ──────────────────────────────────────────────────────────────
 function clamp(v,a,b){return Math.max(a,Math.min(b,isNaN(v)?a:v));}
 function gv(id){var e=document.getElementById(id);return clamp(parseInt((e||{}).value)||0,0,9999);}
-function sumArr(arr,from,to){var s={steel:0,rfc:0,shrd:0,meat:0,coal:0,iron:0,time:0};for(var i=from;i<to;i++){var d=arr[i];s.steel+=d.steel||0;s.rfc+=d.rfc||0;s.shrd+=d.shrd||0;s.meat+=d.meat||0;s.coal+=d.coal||0;s.iron+=d.iron||0;s.time+=d.time||0;}return s;}
-function sumFn(fn,from,to){var s={steel:0,rfc:0,shrd:0,meat:0,coal:0,iron:0,time:0};for(var i=from+1;i<=to;i++){var d=fn(i);s.steel+=d.steel;s.rfc+=d.rfc;s.shrd+=d.shrd;s.meat+=d.meat;s.coal+=d.coal;s.iron+=d.iron;s.time+=d.time;}return s;}
-function addTo(tot,s){tot.steel+=s.steel;tot.rfc+=s.rfc;tot.shrd+=s.shrd;tot.meat+=s.meat;tot.coal+=s.coal;tot.iron+=s.iron;tot.time+=s.time;}
+function sumArr(arr,from,to){var s={steel:0,rfc:0,shrd:0,meat:0,wood:0,coal:0,iron:0,time:0};for(var i=from;i<to;i++){var d=arr[i];s.steel+=d.steel||0;s.rfc+=d.rfc||0;s.shrd+=d.shrd||0;s.meat+=d.meat||0;s.wood+=d.wood||0;s.coal+=d.coal||0;s.iron+=d.iron||0;s.time+=d.time||0;}return s;}
+function sumFn(fn,from,to){var s={steel:0,rfc:0,shrd:0,meat:0,wood:0,coal:0,iron:0,time:0};for(var i=from+1;i<=to;i++){var d=fn(i);s.steel+=d.steel;s.rfc+=d.rfc;s.shrd+=d.shrd;s.meat+=d.meat;s.wood+=d.wood||0;s.coal+=d.coal;s.iron+=d.iron;s.time+=d.time;}return s;}
+function addTo(tot,s){tot.steel+=s.steel;tot.rfc+=s.rfc;tot.shrd+=s.shrd;tot.meat+=s.meat;tot.wood+=s.wood||0;tot.coal+=s.coal;tot.iron+=s.iron;tot.time+=s.time;}
 function fmt(n){if(n>=1e9)return(n/1e9).toFixed(2)+'B';if(n>=1e6)return(n/1e6).toFixed(2)+'M';if(n>=1000)return(n/1000).toFixed(1)+'K';return Math.round(n).toString();}
 function fmtTime(days) {
   var totalMins = Math.round(days * 24 * 60);
@@ -506,6 +563,10 @@ function calcTroop(tid, tot) {
     var c=clamp(gv(p+'skill2-'+sk+'-cur'),0,50), t=clamp(gv(p+'skill2-'+sk+'-tgt'),0,50);
     if (t>c) addTo(tot, sumFn(getSkill2Row, c, t));
   });
+  EXALTED_SKILLS.forEach(function(ex) {
+    var c=clamp(gv(p+'exalted-'+ex+'-cur'),0,10), t=clamp(gv(p+'exalted-'+ex+'-tgt'),0,10);
+    if (t>c) addTo(tot, sumArr(exaltedData, c, t));
+  });
   var sc=clamp(gv(p+'solar-cur'),0,15), st=clamp(gv(p+'solar-tgt'),0,15);
   if (st>sc) addTo(tot, sumArr(solarData, sc, st));
   SKILLS.forEach(function(sk) {
@@ -535,6 +596,9 @@ function buildSummary(active) {
         if ((parseInt(document.getElementById(p+sk+'-'+s+'-tgt').value)||0) > (parseInt(document.getElementById(p+sk+'-'+s+'-cur').value)||0)) hasAnyChange = true;
       });
     });
+    EXALTED_SKILLS.forEach(function(ex) {
+      if ((parseInt(document.getElementById(p+'exalted-'+ex+'-tgt').value)||0) > (parseInt(document.getElementById(p+'exalted-'+ex+'-cur').value)||0)) hasAnyChange = true;
+    });
     if ((parseInt(document.getElementById(p+'troopskill-tgt').value)||0) > (parseInt(document.getElementById(p+'troopskill-cur').value)||0)) hasAnyChange = true;
     if ((parseInt(document.getElementById(p+'solar-tgt').value)||0) > (parseInt(document.getElementById(p+'solar-cur').value)||0)) hasAnyChange = true;
     if (!hasAnyChange) return;
@@ -562,6 +626,15 @@ function buildSummary(active) {
       if (tags) h += '<div class="summary-section"><span class="summary-section-label">' + sp.label + '</span>' + tags + '</div>';
     });
 
+    // Reduction Techs
+    var exTags = '';
+    EXALTED_SKILLS.forEach(function(ex) {
+      var c = parseInt(document.getElementById(p+'exalted-'+ex+'-cur').value)||0;
+      var tv = parseInt(document.getElementById(p+'exalted-'+ex+'-tgt').value)||0;
+      if (tv > c) exTags += '<span class="summary-tag">' + EXALTED_LABELS[ex] + ' ' + c + '&#8594;' + tv + '</span>';
+    });
+    if (exTags) h += '<div class="summary-section"><span class="summary-section-label">Reduction Techs</span>' + exTags + '</div>';
+
     // Troop Skill
     var tsc = parseInt(document.getElementById(p+'troopskill-cur').value)||0;
     var tst = parseInt(document.getElementById(p+'troopskill-tgt').value)||0;
@@ -587,12 +660,13 @@ function calc() {
   var active = TROOPS.filter(function(t){ return state[t.id].enabled; });
   if (!active.length) { warn.style.display='block'; warn.textContent='Please enable at least one troop type!'; return; }
   warn.style.display = 'none';
-  var tot = {steel:0,rfc:0,shrd:0,meat:0,coal:0,iron:0,time:0};
+  var tot = {steel:0,rfc:0,shrd:0,meat:0,wood:0,coal:0,iron:0,time:0};
   active.forEach(function(t) { calcTroop(t.id, tot); });
   document.getElementById('r-steel').textContent = Math.round(tot.steel).toLocaleString();
   document.getElementById('r-rfc').textContent   = Math.round(tot.rfc).toLocaleString();
   document.getElementById('r-shrd').textContent  = Math.round(tot.shrd).toLocaleString();
   document.getElementById('r-meat').textContent  = Math.round(tot.meat).toLocaleString();
+  document.getElementById('r-wood').textContent  = Math.round(tot.wood).toLocaleString();
   document.getElementById('r-coal').textContent  = Math.round(tot.coal).toLocaleString();
   document.getElementById('r-iron').textContent  = Math.round(tot.iron).toLocaleString();
   document.getElementById('r-time').textContent  = fmtTime(tot.time);
