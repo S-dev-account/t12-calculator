@@ -406,26 +406,6 @@ function panelHTML(tid) {
     + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'solar-tgt', 15) + '</div>'
     + '</div>';
 
-  // EXALTED
-  var exCurIds = [], exTgtIds = [];
-  EXALTED_SKILLS.forEach(function(ex) {
-    exCurIds.push(p+'exalted-'+ex+'-cur');
-    exTgtIds.push(p+'exalted-'+ex+'-tgt');
-  });
-  h += '<div class="divider"></div>'
-    + '<div class="section-title-row">'
-    + '<div class="section-title">Reduction Techs <span class="max-badge">(max 10)</span></div>'
-    + '</div>'
-    + makeQS(exCurIds, exTgtIds, 10);
-  EXALTED_SKILLS.forEach(function(ex) {
-    h += '<div class="skill-block">'
-      + '<div class="skill-block-label">' + EXALTED_LABELS[ex] + '</div>'
-      + '<div class="skill-grid">'
-      + '<div class="skill-item"><label>Current Level</label>' + numSel(p+'exalted-'+ex+'-cur', 10) + '</div>'
-      + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'exalted-'+ex+'-tgt', 10) + '</div>'
-      + '</div></div>';
-  });
-
   // SKILLS III
   var s3CurIds = [], s3TgtIds = [], s3Fields = [];
   SKILLS.forEach(function(sk) {
