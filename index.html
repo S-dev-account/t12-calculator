@@ -14,8 +14,17 @@
   .note { font-size: 0.72em; color: #6a8a9a; margin-top: 6px; }
   .max-badge { font-size: 0.68em; color: #6a8a9a; font-weight: normal; }
   .section-title { color: #9ab8d0; font-size: 0.88em; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-  .section-title-row { display: flex; align-items: center; justify-content: space-between; margin: 10px 0 6px; }
+  .section-title-row { display: flex; align-items: center; justify-content: space-between; margin: 0 0 8px; }
   .section-title-row .section-title { margin: 0; }
+
+  .sec-card { background: #0d1b2a; border: 1px solid #1e3a55; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; border-left: 3px solid #2e5a8a; }
+  .sec-card.gear    { border-left-color: #4a9eff; }
+  .sec-card.skill1  { border-left-color: #4fd17a; }
+  .sec-card.troop   { border-left-color: #f0a040; }
+  .sec-card.redtech { border-left-color: #c060f0; }
+  .sec-card.skill2  { border-left-color: #4fd17a; }
+  .sec-card.solar   { border-left-color: #f0e040; }
+  .sec-card.skill3  { border-left-color: #4fd17a; }
 
   .accordion { margin-bottom: 10px; border-radius: 10px; overflow: hidden; border: 2px solid #1e3a55; }
   .accordion.enabled { border-color: #2e5a8a; }
@@ -108,25 +117,71 @@
     <span class="chevron" id="guide-chevron">&#9660;</span>
   </div>
   <div id="guide-body" style="display:none;padding:14px 16px;background:#0f1f30;">
+
     <div class="section-title" style="margin-bottom:6px;">1 &middot; Select Your Troop Types</div>
-    <p style="font-size:0.82em;color:#c0d8e8;line-height:1.6;margin-bottom:6px;">Three sections &mdash; <strong>Infantry</strong>, <strong>Lancer</strong> and <strong>Marksman</strong>. Toggle <strong>Include</strong> to include or exclude. Click the header to collapse or expand.</p>
+    <p style="font-size:0.82em;color:#c0d8e8;line-height:1.6;margin-bottom:6px;">The calculator has three troop type sections &mdash; <strong>Infantry</strong> &#128737;&#65039;, <strong>Lancer</strong> &#128052; and <strong>Marksman</strong> &#127985;. Each section is independent and tracks its own upgrade levels.</p>
+    <ul style="font-size:0.8em;color:#9ab8d0;line-height:1.8;padding-left:16px;margin-bottom:4px;">
+      <li>Use the <strong>Include</strong> toggle to include or exclude a troop type from the total calculation</li>
+      <li>Click the section header to collapse or expand it</li>
+      <li>Use the <strong>&#8635; Reset</strong> button in the header to clear all values for that troop type</li>
+    </ul>
+
     <div class="divider"></div>
     <div class="section-title" style="margin-bottom:6px;">2 &middot; Fill In Your Levels</div>
-    <p style="font-size:0.82em;color:#c0d8e8;line-height:1.6;margin-bottom:6px;">Set <strong>Current</strong> and <strong>Target</strong> levels using the dropdowns. Use <strong>Quick Select</strong> to set a value across all rows in a section at once. Leave at 0 for anything not being upgraded.</p>
-    <div class="divider"></div>
-    <div class="section-title" style="margin-bottom:6px;">3 &middot; Calculate</div>
-    <p style="font-size:0.82em;color:#c0d8e8;line-height:1.6;">Hit <strong>&#9889; Calculate Resources</strong> at the bottom. Results and an upgrade summary will appear.</p>
-    <div class="divider"></div>
-    <div class="section-title" style="margin-bottom:6px;">&#128221; Notes</div>
-    <ul style="font-size:0.8em;color:#9ab8d0;line-height:1.8;padding-left:16px;">
-      <li>Each gear piece is costed independently</li>
-      <li>If Target is below Current the field turns red and Calculate disables</li>
+    <p style="font-size:0.82em;color:#c0d8e8;line-height:1.6;margin-bottom:6px;">Inside each troop section, set your <strong>Current Level</strong> (where you are now) and <strong>Target Level</strong> (where you want to get to) using the dropdowns. Leave both at 0 for anything you are not upgrading.</p>
+    <p style="font-size:0.82em;color:#c0d8e8;line-height:1.6;margin-bottom:6px;">Each section covers:</p>
+    <ul style="font-size:0.8em;color:#9ab8d0;line-height:1.8;padding-left:16px;margin-bottom:4px;">
+      <li><strong>Gear</strong> &mdash; Head, Shoulder, Body, Feet and Weapon are each tracked independently (max level 5)</li>
+      <li><strong>Skills I</strong> &mdash; Attack, Defense, Lethality and Health individually (max level 20)</li>
+      <li><strong>Troop Skill</strong> &mdash; the unique skill per troop type (max level 3)</li>
+      <li><strong>Reduction Techs</strong> &mdash; Healing Cost, Healing Time and Training Cost (max level 10)</li>
+      <li><strong>Skills II</strong> &mdash; Attack, Defense, Lethality and Health individually (max level 50)</li>
+      <li><strong>Solar Supremacy</strong> &mdash; (max level 15)</li>
+      <li><strong>Skills III</strong> &mdash; Attack, Defense, Lethality and Health individually (max level 50)</li>
     </ul>
+
+    <div class="divider"></div>
+    <div class="section-title" style="margin-bottom:6px;">3 &middot; Quick Select</div>
+    <p style="font-size:0.82em;color:#c0d8e8;line-height:1.6;margin-bottom:6px;">Each section has a <strong>Quick Select</strong> box with two dropdowns &mdash; <em>Set All Current</em> and <em>Set All Target</em>. Picking a value instantly fills all rows in that section with the chosen level, saving you from setting each one individually.</p>
+    <p style="font-size:0.82em;color:#c0d8e8;line-height:1.6;">For example: pick 20 in <em>Set All Target</em> under Skills I to set Attack, Defense, Lethality and Health all to target level 20 at once.</p>
+
+    <div class="divider"></div>
+    <div class="section-title" style="margin-bottom:6px;">4 &middot; Research Speed Bonus</div>
+    <p style="font-size:0.82em;color:#c0d8e8;line-height:1.6;">Before calculating, enter your <strong>Research Speed Bonus %</strong> in the field above the Calculate button. This is a speed multiplier &mdash; 100% means your research runs at 2&times; speed (half the time), 200% at 3&times; speed, and so on. The results will show both the raw research time and your effective time with the bonus applied.</p>
+
+    <div class="divider"></div>
+    <div class="section-title" style="margin-bottom:6px;">5 &middot; Calculate</div>
+    <p style="font-size:0.82em;color:#c0d8e8;line-height:1.6;margin-bottom:6px;">Hit <strong>&#9889; Calculate Resources</strong> to see your totals. Two cards will appear:</p>
+    <ul style="font-size:0.8em;color:#9ab8d0;line-height:1.8;padding-left:16px;">
+      <li><strong>Total Resources Needed</strong> &mdash; Steel, Refined FC, FC Shards, Meat, Wood, Coal, Iron and Research Time</li>
+      <li><strong>Upgrade Summary</strong> &mdash; a breakdown of exactly which upgrades are included, shown per troop type. Only troop types and sections with actual changes are displayed</li>
+    </ul>
+
+    <div class="divider"></div>
+    <div class="section-title" style="margin-bottom:6px;">&#128221; Tips</div>
+    <ul style="font-size:0.8em;color:#9ab8d0;line-height:1.8;padding-left:16px;">
+      <li>If a Target level is set below Current level the field turns <span style="color:#ff5555">red</span> and the Calculate button disables until fixed</li>
+      <li>Steel, Refined FC and FC Shards always show the exact full number</li>
+    </ul>
+
   </div>
 </div>
 
 <div id="accordions"></div>
 
+<div style="max-width:720px;margin:0 auto 10px;background:#162233;border:1px solid #1e3a55;border-radius:10px;padding:12px 16px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+    <div>
+      <div class="section-title" style="margin-bottom:4px;">&#9201;&#65039; Research Speed Bonus</div>
+      <div style="font-size:0.72em;color:#6a8a9a;">Enter your total research speed reduction % (e.g. 85 = 85% faster)</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+      <input type="number" id="speed-bonus" min="0" max="9999" value="0"
+        style="width:70px;background:#0d1b2a;border:1px solid #2e5070;border-radius:4px;color:#e0e8f0;padding:6px 8px;font-size:1em;text-align:center;">
+      <span style="color:#9ab8d0;font-size:0.9em;">%</span>
+    </div>
+  </div>
+</div>
 <div class="calc-btn-wrap">
   <button class="calc-btn" id="calc-btn" onclick="calc()">&#9889; Calculate Resources</button>
 </div>
@@ -142,7 +197,8 @@
     <div class="res-item"><div class="res-label">&#129683; Wood</div><div class="res-val orange" id="r-wood">&#8212;</div></div>
     <div class="res-item"><div class="res-label">&#129704; Coal</div><div class="res-val white" id="r-coal">&#8212;</div></div>
     <div class="res-item"><div class="res-label">&#9935;&#65039; Iron</div><div class="res-val white" id="r-iron">&#8212;</div></div>
-    <div class="res-item"><div class="res-label">&#9201;&#65039; Research Time</div><div class="res-val red" id="r-time">&#8212;</div></div>
+    <div class="res-item"><div class="res-label">&#9201;&#65039; Research Time (raw)</div><div class="res-val red" id="r-time">&#8212;</div></div>
+    <div class="res-item"><div class="res-label">&#9201;&#65039; Research Time (effective)</div><div class="res-val red" id="r-time-eff">&#8212;</div></div>
     <div class="res-item"><div class="res-label">&#129706; Included Types</div><div class="res-val white" id="r-types">&#8212;</div></div>
   </div>
   <div class="note" style="margin-top:10px">Each combat skill is calculated individually per troop type.</div>
@@ -308,7 +364,8 @@ function panelHTML(tid) {
     gearCurIds.push(p+g+'-cur');
     gearTgtIds.push(p+g+'-tgt');
   });
-  h += '<div class="section-title-row">'
+  h += '<div class="sec-card gear">'
+    + '<div class="section-title-row">'
     + '<div class="section-title">&#127917; Gear <span class="max-badge">(max 5)</span></div>'
     + '</div>'
     + makeQS(gearCurIds, gearTgtIds, 5);
@@ -320,7 +377,7 @@ function panelHTML(tid) {
       + '<td class="center">' + numSel(p+g+'-cur', 5) + '</td>'
       + '<td class="center">' + numSel(p+g+'-tgt', 5) + '</td></tr>';
   });
-  h += '</tbody></table>';
+  h += '</tbody></table></div>';
 
   // SKILLS I
   var s1CurIds = [], s1TgtIds = [], s1Fields = [];
@@ -330,7 +387,7 @@ function panelHTML(tid) {
     s1Fields.push('skill1-'+sk+'-cur');
     s1Fields.push('skill1-'+sk+'-tgt');
   });
-  h += '<div class="divider"></div>'
+  h += '<div class="sec-card skill1">'
     + '<div class="section-title-row">'
     + '<div class="section-title">Skills I <span class="max-badge">(max 20)</span></div>'
     + '</div>'
@@ -343,16 +400,17 @@ function panelHTML(tid) {
       + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'skill1-'+sk+'-tgt', 20) + '</div>'
       + '</div></div>';
   });
+  h += '</div>';
 
   // TROOP SKILL
-  h += '<div class="divider"></div>'
+  h += '<div class="sec-card troop">'
     + '<div class="section-title-row">'
     + '<div class="section-title">Troop Skill <span class="max-badge">(max 3)</span></div>'
     + '</div>'
     + '<div class="skill-grid">'
     + '<div class="skill-item"><label>Current Level</label>' + numSel(p+'troopskill-cur', 3) + '</div>'
     + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'troopskill-tgt', 3) + '</div>'
-    + '</div>';
+    + '</div></div>';
 
   // EXALTED
   var exCurIds = [], exTgtIds = [];
@@ -360,7 +418,7 @@ function panelHTML(tid) {
     exCurIds.push(p+'exalted-'+ex+'-cur');
     exTgtIds.push(p+'exalted-'+ex+'-tgt');
   });
-  h += '<div class="divider"></div>'
+  h += '<div class="sec-card redtech">'
     + '<div class="section-title-row">'
     + '<div class="section-title">Reduction Techs <span class="max-badge">(max 10)</span></div>'
     + '</div>'
@@ -373,6 +431,7 @@ function panelHTML(tid) {
       + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'exalted-'+ex+'-tgt', 10) + '</div>'
       + '</div></div>';
   });
+  h += '</div>';
 
   // SKILLS II
   var s2CurIds = [], s2TgtIds = [], s2Fields = [];
@@ -382,7 +441,7 @@ function panelHTML(tid) {
     s2Fields.push('skill2-'+sk+'-cur');
     s2Fields.push('skill2-'+sk+'-tgt');
   });
-  h += '<div class="divider"></div>'
+  h += '<div class="sec-card skill2">'
     + '<div class="section-title-row">'
     + '<div class="section-title">Skills II <span class="max-badge">(max 50)</span></div>'
     + '</div>'
@@ -395,16 +454,17 @@ function panelHTML(tid) {
       + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'skill2-'+sk+'-tgt', 50) + '</div>'
       + '</div></div>';
   });
+  h += '</div>';
 
   // SOLAR SUPREMACY
-  h += '<div class="divider"></div>'
+  h += '<div class="sec-card solar">'
     + '<div class="section-title-row">'
     + '<div class="section-title">Solar Supremacy <span class="max-badge">(max 15)</span></div>'
     + '</div>'
     + '<div class="skill-grid">'
     + '<div class="skill-item"><label>Current Level</label>' + numSel(p+'solar-cur', 15) + '</div>'
     + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'solar-tgt', 15) + '</div>'
-    + '</div>';
+    + '</div></div>';
 
   // SKILLS III
   var s3CurIds = [], s3TgtIds = [], s3Fields = [];
@@ -414,7 +474,7 @@ function panelHTML(tid) {
     s3Fields.push('skill3-'+sk+'-cur');
     s3Fields.push('skill3-'+sk+'-tgt');
   });
-  h += '<div class="divider"></div>'
+  h += '<div class="sec-card skill3">'
     + '<div class="section-title-row">'
     + '<div class="section-title">Skills III <span class="max-badge">(max 50)</span></div>'
     + '</div>'
@@ -427,6 +487,7 @@ function panelHTML(tid) {
       + '<div class="skill-item"><label>Target Level</label>'  + numSel(p+'skill3-'+sk+'-tgt', 50) + '</div>'
       + '</div></div>';
   });
+  h += '</div>';
 
   return h;
 }
@@ -650,6 +711,9 @@ function calc() {
   document.getElementById('r-coal').textContent  = Math.round(tot.coal).toLocaleString();
   document.getElementById('r-iron').textContent  = Math.round(tot.iron).toLocaleString();
   document.getElementById('r-time').textContent  = fmtTime(tot.time);
+  var speedBonus = Math.max(parseFloat(document.getElementById('speed-bonus').value)||0, 0);
+  var effectiveTime = tot.time / (1 + speedBonus / 100);
+  document.getElementById('r-time-eff').textContent = fmtTime(effectiveTime);
   document.getElementById('r-types').textContent = active.map(function(t){return t.label;}).join(', ');
   document.getElementById('results-card').classList.add('visible');
   buildSummary(active);
